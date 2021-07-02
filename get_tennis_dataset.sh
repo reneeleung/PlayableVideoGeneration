@@ -4,8 +4,8 @@ mkdir tmp
 cd tmp
 
 # Download youtube files
-youtube-dl -o djokovic_federer_wimbledon.mp4 https://www.youtube.com/watch?v=TUikJi0Qhhw
-youtube-dl -o nadal_kyrgios_wimbledon.mp4 https://www.youtube.com/watch?v=T4S5YmO0KOU
+youtube-dl -k -o djokovic_federer_wimbledon.mp4 https://www.youtube.com/watch?v=TUikJi0Qhhw
+youtube-dl -k -o nadal_kyrgios_wimbledon.mp4 https://www.youtube.com/watch?v=T4S5YmO0KOU
 
 mv djokovic_federer_wimbledon.f137.mp4 djokovic_federer_wimbledon.mp4
 mv nadal_kyrgios_wimbledon.f137.mp4 nadal_kyrgios_wimbledon.mp4
@@ -29,4 +29,4 @@ mv tmp/tennis_v4_256_ours/train data/tennis_v4_256_ours/train
 mv tmp/tennis_v4_256_ours/val_fixed_length data/tennis_v4_256_ours/val
 mv tmp/tennis_v4_256_ours/test_fixed_length data/tennis_v4_256_ours/test
 
-rm -rf tmp
+#rm -rf tmp

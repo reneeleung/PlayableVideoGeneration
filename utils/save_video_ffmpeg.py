@@ -29,7 +29,7 @@ class VideoSaver:
         image = Image.fromarray(frame)
 
         draw = ImageDraw.Draw(image)
-        font = ImageFont.truetype("fonts/Roboto-Regular.ttf", pointsize)
+        font = ImageFont.truetype("/video-generation/utils/fonts/Roboto-Regular.ttf", pointsize)
 
         x, y = point
         # thin border

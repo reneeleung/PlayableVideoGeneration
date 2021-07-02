@@ -12,7 +12,7 @@ from torch.utils.data import DataLoader
 
 from PIL import Image
 
-from sklearn.utils.linear_assignment_ import linear_assignment
+from scipy.optimize import linear_sum_assignment as linear_assignment
 
 from dataset.batching import single_batch_elements_collate_fn
 from dataset.video_dataset import VideoDataset

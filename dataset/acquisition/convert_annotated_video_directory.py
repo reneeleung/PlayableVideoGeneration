@@ -11,7 +11,7 @@ from PIL import Image
 
 from dataset.video import Video
 
-
+cv2.setNumThreads(1)
 video_extension = "mp4"
 frames_extension = "png"
 root_directory = "tmp"

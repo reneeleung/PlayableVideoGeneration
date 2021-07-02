@@ -52,6 +52,17 @@ Run the docker image mounting the root directory to `/video-generation` in the d
 
 `docker run -it --gpus all --ipc=host -v /path/to/directory/video-generation:/video-generation video-generation:1.0 /bin/bash`
 
+## Singularity
+Build container remotely, requires an account on https://cloud.sylabs.io
+
+`./singularity_build.sh`
+
+Run an interactive job on a Cedar node
+
+`salloc --gres=gpu:v100l:1 --time=0-00:30 --mem-per-cpu=16000 --x11`
+
+`singularity exec --nv -B $PWD:/video-generation -B /etc/pki/tls/certs/ca-bundle.crt --env DISPLAY=$DISPLAY --pwd /video-generation videogeneration.sif ./singularityvideogen.sh`
+
 # Preparing Datasets
 
 ## BAIR

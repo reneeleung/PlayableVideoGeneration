@@ -1,0 +1,37 @@
+BootStrap: docker
+From: nvidia/cuda:11.2.2-base-ubuntu18.04
+
+
+
+%files
+    env.yml
+
+%environment
+    export PATH=/opt/miniconda3/bin:$PATH
+    export WANDB_API_KEY=
+
+%post
+    apt-get update
+    apt-get install -y vim wget ffmpeg build-essential bzip2
+    apt-get install -y ubuntu-drivers-common
+    export DEBIAN_FRONTEND=noninteractive
+    apt install -y nvidia-driver-460
+    reboot # solves driver / library version mismatch
+
+    wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+    bash Miniconda3-latest-Linux-x86_64.sh -b -p /opt/miniconda3/
+    export PATH=/opt/miniconda3/bin:$PATH #cannot create environments without this
+    rm Miniconda3-latest-Linux-x86_64.sh
+
+    conda env create -f env.yml
+
+    mkdir video-generation
+    cd video-generation
+
+    #Do these in the interactive shell
+    #/opt/miniconda3/condabin/conda init bash
+    #/bin/bash -c "source ~/.bashrc"
+    #echo "conda activate video-generation" >> ~/.bashrc
+
+    #/bin/bash -c "source /home/rleung/.bashrc && conda run -n video-generation wandb on"
+
