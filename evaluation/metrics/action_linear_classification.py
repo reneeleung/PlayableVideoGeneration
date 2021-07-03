@@ -48,7 +48,7 @@ class ActionClassificationScore:
         vectors_count = vectors.shape[0]
 
         # Trains the svm on the movement vectors to predict the actions
-        clf = OneVsOneClassifier(svm.LinearSVC(random_state=0, max_iter=10000))
+        clf = OneVsOneClassifier(svm.LinearSVC(random_state=0, dual=False))
 
         clf.fit(vectors, actions)
         predicted_actions = clf.predict(vectors)
@@ -85,7 +85,7 @@ class ActionClassificationScore:
         vectors_count = vectors.shape[0]
 
         # Trains the svm on the movement vectors to predict the actions
-        clf = svm.LinearSVC(max_iter=10000)
+        clf = svm.LinearSVC(dual=False)
         clf.fit(vectors, actions)
         predicted_actions = clf.predict(vectors)
 

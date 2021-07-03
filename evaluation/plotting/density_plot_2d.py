@@ -55,7 +55,7 @@ class DensityPlotter2D:
             else:
                 x_data = current_vectors[:, 0]
                 y_data = -current_vectors[:, 1]
-            plot = sns.kdeplot(x_data, y_data, cmap="Blues", shade=True)
+            plot = sns.kdeplot(x=x_data, y=y_data, cmap="Blues", shade=True)
             plot.set(ylim=ylim)
             plot.set(xlim=xlim)
 
