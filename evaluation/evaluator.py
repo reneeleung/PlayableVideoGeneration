@@ -488,7 +488,7 @@ class Evaluator:
 
         # return as list of tuples, out_c to gt_c
         res = []
-        for out_c, gt_c in match:
+        for out_c, gt_c in zip(*match):
             res.append((out_c, gt_c))
 
         return res
