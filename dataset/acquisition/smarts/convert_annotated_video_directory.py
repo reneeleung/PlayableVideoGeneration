@@ -31,22 +31,24 @@ def acquire_sequence(video_path: str, output_path: str):
     '''
 
     images = []
+    actions = []
     frames = sorted(os.listdir(video_path), key=natural_keys)
     capture_index = 0
     end_frame = len(frames)
     while capture_index < end_frame:
         frame = frames[capture_index]
-        assert(int(frame.split('_')[0]) == capture_index, f"Error on {video_path}")
+        assert int(frame.split('_')[0]) == capture_index, f"Error on {video_path}"
         # Read PIL image
         current_image = Image.open(os.path.join(video_path, frames[capture_index]))
         images.append(current_image)
+        actions.append(int(frame.split('_')[1][:1])) # first char after _
 
         # Skip the specified number of frames between frames to acquire
         last_index = capture_index
         capture_index += frameskip+1
 
     frames_count = len(images)
-    actions = [None] * frames_count
+    #actions = [None] * frames_count
     rewards = [None] * frames_count
     dones = [None] * frames_count
     metadata = [None] * frames_count
@@ -79,8 +81,8 @@ if __name__ == "__main__":
     for identity in ids:
         video_path = os.path.join(root_directory, identity)
         num_frames = len(os.listdir(video_path))
-        # Only sample frames of length at least 16
-        if num_frames >= 16:
+        # Only sample frames of length at least 15
+        if num_frames >= 15:
             work_items.append((video_path, index))
             print(f"{index}, {identity}")
             index += 1

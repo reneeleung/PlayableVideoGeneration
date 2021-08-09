@@ -1,7 +1,7 @@
 # Logging parameters
 logging:
   # Name which which the run will be logged
-  run_name: "04_smarts"
+  run_name: "05_smarts_tune"
 
   # Directory where main results are saved
   output_root: "results"
@@ -11,13 +11,13 @@ logging:
 # Dataset parameters
 data:
   # Dataset path
-  data_root: "data/smarts_v4_256_ours"
+  data_root: "data/smarts_actions_256_ours"
   # Crop to apply to each frame [left_index, upper_index, right_index, lower_index]
   crop: [0, 0, 256, 256]
   # Number of distinct actions present in the dataset
   actions_count: 4
   # True if ground truth annotations are available
-  ground_truth_available: False
+  ground_truth_available: True
 
 # Model parameters
 model:
@@ -143,17 +143,17 @@ training:
     # Weights for the action distribution entropy loss during pretraining
     entropy_lambda_pretraining: 0.0
     # Weights for the action directions kl divergence loss
-    action_directions_kl_lambda: 0.0001
+    action_directions_kl_lambda: 0.005
     # Weights for the action directions kl divergence loss during pretraining
-    action_directions_kl_lambda_pretraining: 0.0001
+    action_directions_kl_lambda_pretraining: 0.005
     # Weights for the action mutual information loss
-    action_mutual_information_lambda: 0.10
+    action_mutual_information_lambda: 0.30
     # Weights for the action mutual information loss during pretraining
-    action_mutual_information_lambda_pretraining: 0.10
+    action_mutual_information_lambda_pretraining: 0.30
     # Weights for the kl distance loss between action states and reconstructed action states
-    action_state_distribution_kl_lambda: 0.00001
+    action_state_distribution_kl_lambda: 0.0005
     # Weights for the kl distance loss between action states and reconstructed action states during pretraining
-    action_state_distribution_kl_lambda_pretraining: 0.00001
+    action_state_distribution_kl_lambda_pretraining: 0.0005
 
   # Number of steps between each plotting of the action space
   action_direction_plotting_freq: 1000

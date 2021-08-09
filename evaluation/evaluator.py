@@ -106,6 +106,7 @@ class Evaluator:
         # All the selected actions and ground truth ones
         all_gt_actions = []
         all_pred_actions = []
+        f = open("evaluator.out", "a")
 
         # Number of video sequence samples analyzed
         total_sequences = 0
@@ -203,6 +204,11 @@ class Evaluator:
                 loss_averager.add({"action_mutual_information_loss": action_mutual_information_loss.item()})
 
                 # Saves the flattened actions
+                if "gt" in self.logger_prefix:
+                    f.write(f"selected_actions.shape={selected_actions.shape}\n")
+                    f.write(f"batch.actions.shape={batch.actions.shape}\n")
+                    f.write(f"(pred)selected_actions={selected_actions.reshape((-1))}\n")
+                    f.write(f"(gt)batch.actions[:-1]={batch.actions[:,:-1].reshape((-1))}\n")
                 all_pred_actions.append(selected_actions.reshape((-1)))
                 all_gt_actions.append(batch.actions[:, :-1].reshape((-1))) # The last action of each sequence cannot be predicted
 
@@ -216,6 +222,9 @@ class Evaluator:
         all_gt_actions = torch.cat(all_gt_actions)
 
         actions_accuracy, actions_match = self.compute_actions_accuracy(all_pred_actions, all_gt_actions)
+        if "gt" in self.logger_prefix:
+            f.write(f"actions_accuracy={actions_accuracy}\n")
+            f.write(f"actions_match={actions_match}\n")
 
         # Plots the distribution of action directions
         all_action_direction_distributions = torch.cat(all_action_direction_distributions, dim=0)
@@ -244,6 +253,9 @@ class Evaluator:
         self.logger.print("- entropy: {:.3f}".format(log_data[f'{self.logger_prefix}/entropy']))
         self.logger.print("- samples entropy: {:.3f}".format(log_data[f'{self.logger_prefix}/samples_entropy']))
         self.logger.print("- action distribution entropy: {:.3f}".format(log_data[f'{self.logger_prefix}/action_distribution_entropy']))
+        if "gt" in self.logger_prefix:
+            f.write("-------------------------------------------------------\n")
+        f.close()
 
         return
 

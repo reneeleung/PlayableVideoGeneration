@@ -61,7 +61,7 @@ Run an interactive job on a Cedar node
 
 `salloc --gres=gpu:v100l:1 --time=0-00:30 --mem-per-cpu=16000 --x11`
 
-`singularity exec --nv -B $PWD:/video-generation -B /etc/pki/tls/certs/ca-bundle.crt --env DISPLAY=$DISPLAY --pwd /video-generation videogeneration.sif ./singularityvideogen.sh`
+`singularity exec --nv -B $PWD:/video-generation -B /etc/pki/tls/certs/ca-bundle.crt --env DISPLAY=$DISPLAY --pwd /video-generation videogeneration.sif ./singularityactionsvid.sh`
 
 # Preparing Datasets
 
@@ -84,6 +84,11 @@ The Tennis dataset is automatically acquired from Youtube by running
 This requires an installation of `youtube-dl` ([Download](https://github.com/ytdl-org/youtube-dl)).
 Please run `youtube-dl -U` to update the utility to the latest version.
 The dataset will be created at `data/tennis_v4_256_ours`.
+
+
+## SMARTS
+
+`./get_smarts_dataset.sh`
 
 ## Custom Datasets
 

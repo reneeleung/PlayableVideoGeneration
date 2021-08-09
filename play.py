@@ -24,8 +24,8 @@ from utils.save_video_ffmpeg import VideoSaver
 
 save_directory = "play_results"
 image_extension = "png"
-zoom_factor = 10
-framerate = 5
+zoom_factor = 1
+framerate = 1
 
 if __name__ == "__main__":
     # Loads configuration file
@@ -167,7 +167,9 @@ if __name__ == "__main__":
                     try:
                         print(f"\n- Insert current action in [1, {config['data']['actions_count']}], 0 to reset: ")
                         #current_action = int(input_helper.read_character())
-                        current_action = int(cv.waitKey(0)) - ord('0')
+                        a1 = int(cv.waitKey(0)) - ord('0')
+                        a2 = int(cv.waitKey(0)) - ord('0')
+                        current_action = a1*10+a2
 
                         current_action -= 1 # Puts the action in the expected range for the model
                         if current_action != -1 and (current_action < 0 or current_action >= config['data']['actions_count']):
